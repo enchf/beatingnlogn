@@ -1,7 +1,7 @@
 package j4g.util;
 
 /**
- * Created by Ernesto_Espinosa on 1/26/2017.
+ * Time watch for Runnable objects.
  */
 public class Timer implements Runnable {
 
