@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  *
  */
-public class CountingSort {
+public class CountingSort implements IntSort {
 
     private int min;
     private int max;

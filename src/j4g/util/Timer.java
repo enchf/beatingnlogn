@@ -24,6 +24,7 @@ public class Timer implements Runnable {
     public static Timer with(Runnable object) {
         Timer timer = new Timer();
         timer.runnable = object;
+        timer.run();
         return timer;
     }
 }
