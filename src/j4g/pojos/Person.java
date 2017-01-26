@@ -1,4 +1,4 @@
-package j4g.beatnlogn;
+package j4g.pojos;
 
 /**
  * Sample POJO for person data.
