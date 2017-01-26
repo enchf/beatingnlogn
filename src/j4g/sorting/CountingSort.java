@@ -24,17 +24,15 @@ public class CountingSort implements IntSort {
 
     public void sort(int[] array) {
         int[] counters = new int[max - min + 1];
-
         int[] copy = Arrays.copyOf(array, array.length);
-        int index;
 
-        for (int i : array) counters[indexOfElement(i)]++;
+        classify(array, counters);
         transformCounterToIndices(counters);
+        rearrange(array, copy, counters);
+    }
 
-        for (int i = 0; i < array.length; i++) {
-            index = indexOfElement(copy[i]);
-            array[counters[index]++] = copy[i];
-        }
+    protected void classify(int[] array, int[] counters) {
+        for (int i : array) counters[indexOfElement(i)]++;
     }
 
     protected void transformCounterToIndices(int[] counters) {
@@ -50,14 +48,22 @@ public class CountingSort implements IntSort {
         }
     }
 
-    public int indexOfElement(int element) {
+    protected void rearrange(int[] array, int[] copy, int[] counters) {
+        int index;
+        for (int i = 0; i < array.length; i++) {
+            index = indexOfElement(copy[i]);
+            array[counters[index]++] = copy[i];
+        }
+    }
+
+    protected int indexOfElement(int element) {
         return (element - min) % (max - min + 1);
     }
 
     public static void main(String...args) {
         Timer countingSort, quickSort;
         int[] csArray, qsArray;
-        int size = 5000000;
+        int size = 10;
         int min = 0, max = 105;
 
         csArray = RandomArrays.randomArray(size, 0, 105);
@@ -69,6 +75,6 @@ public class CountingSort implements IntSort {
         System.out.println("Counting sort: " + countingSort.ellapsedTime());
         System.out.println("Arrays.sort Quicksort: " + quickSort.ellapsedTime());
 
-        //System.out.println(Arrays.toString(csArray));
+        System.out.println(Arrays.toString(csArray));
     }
 }

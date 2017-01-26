@@ -8,5 +8,9 @@ public class RadixSort implements IntSort {
     @Override
     public void sort(int[] sort) {
 
+
+        // Optimizations: determine min and max values, and dinamically adjust limits.
+
+
     }
 }
