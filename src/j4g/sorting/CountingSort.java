@@ -13,13 +13,13 @@ public class CountingSort implements IntSort {
     private int min;
     private int max;
 
-    private CountingSort() {}
+    protected CountingSort(int min, int max) {
+        this.min = min;
+        this.max = max;
+    }
 
     public static CountingSort ofRange(int min, int max) {
-        CountingSort sort = new CountingSort();
-        sort.min = min;
-        sort.max = max;
-        return sort;
+        return new CountingSort(min, max);
     }
 
     public void sort(int[] array) {
@@ -60,14 +60,22 @@ public class CountingSort implements IntSort {
         return (element - min) % (max - min + 1);
     }
 
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
     public static void main(String...args) {
         Timer countingSort, quickSort;
         int[] csArray, qsArray;
-        int size = 10;
+        int size = 10000000;
         int min = 0, max = 105;
 
         csArray = RandomArrays.randomArray(size, 0, 105);
-        qsArray = RandomArrays.randomArray(size, 0, 105);
+        qsArray = Arrays.copyOf(csArray, csArray.length); //RandomArrays.randomArray(size, 0, 105);
 
         countingSort = Timer.with(() -> CountingSort.ofRange(min, max).sort(csArray));
         quickSort = Timer.with(() -> Arrays.sort(qsArray));
@@ -75,6 +83,6 @@ public class CountingSort implements IntSort {
         System.out.println("Counting sort: " + countingSort.ellapsedTime());
         System.out.println("Arrays.sort Quicksort: " + quickSort.ellapsedTime());
 
-        System.out.println(Arrays.toString(csArray));
+        //System.out.println(Arrays.toString(csArray));
     }
 }
